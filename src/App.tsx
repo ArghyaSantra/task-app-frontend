@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "./axiosInstance";
+import { useAuth } from "./AuthContext";
+import LoginForm from "./components/LoginForm";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -30,8 +32,14 @@ const App = () => {
     fetchTasks();
   };
 
+  const { token, user, logout } = useAuth();
+
+  if (!token) return <LoginForm />;
+
   return (
     <div style={{ padding: "20px" }}>
+      <button onClick={logout}>Logout</button>
+      <h1>Welcome, {user?.username}</h1>
       <h1>Task Manager</h1>
       <input
         value={title}
