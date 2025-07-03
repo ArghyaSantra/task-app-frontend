@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "./axiosInstance";
 import { useAuth } from "./AuthContext";
 import LoginForm from "./components/LoginForm";
+import ImageUpload from "./components/ImageUpload";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -39,14 +40,16 @@ const App = () => {
   return (
     <div style={{ padding: "20px" }}>
       <button onClick={logout}>Logout</button>
+      <h1>Task Manager + Image Upload</h1>
+      <ImageUpload />
       <h1>Welcome, {user?.username}</h1>
-      <h1>Task Manager</h1>
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Add task"
       />
       <button onClick={addTask}>Add</button>
+      {/* <img src="https://res.cloudinary.com/dgi3xk7ns/image/upload/v1751562039/vbago0ykhujopgrnzet7.png" /> */}
       <ul>
         {tasks.map((task) => (
           <li key={task._id}>
